@@ -1,0 +1,64 @@
+.\" Manpage for DiskAlert.
+.\" Contact github.com/eaydin to correct errors or typos.
+.TH man 1 "8 July 2017" "1.0" "diskalert man page"
+.SH NAME
+diskalert \- Simple tool to get alerts of disk size.
+.SH SYNOPSIS
+diskalert
+.SH DESCRIPTION
+Simply running the program will read the settings in
+.B /etc/diskalert.conf
+and execute accordingly.
+.SH OPTIONS
+This section describes the settings in the diskalert.conf file.
+
+.B [configuration]
+The main configuration section
+
+threshold
+    The percentage that if any of the specified devices have equal or more usage, the alarm will trigger.
+
+devices
+    List of devices (comma seperated) that the script will perform checks.
+
+sleep_time
+    Time between each check, in seconds.
+
+.B [email]
+Configuration about the email alerts.
+
+hostname
+    Email server hostname to connect to.
+
+username
+    The username to connect to the server.
+
+sender
+    The sender email address.
+
+receivers
+    The list of recipients, comma seperated.
+
+password
+    The email password to use while connecting to the server.
+
+port
+    Port to use while connecting to server.
+
+tls
+    If set to True, will use TLS Encryption, otherwise won't.
+
+.SH NOTES
+It is best practice to make the /etc/diskalert.conf file only readible by root and the diskalert program, since it contains the email password.
+The email sent will include the current time and timezone of the server, the outgoing IP address (if it can detect), the hostname, and the CPU temperature in Celsius (if it can detect). Also the full output of
+.B df -h
+command.
+
+.SH BUGS
+None that we're aware of.
+
+.SH WEBSITE
+https://github.com/eaydin/diskalert
+
+.SH AUTHORS
+M. Emre Aydin (eaydin@veriteknik.com), Tunc Yildirim (tunc@veriteknik.com)

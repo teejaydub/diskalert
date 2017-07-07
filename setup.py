@@ -1,5 +1,5 @@
 from setuptools import setup
-import os.path
+import os
 from shutil import copyfile
 
 try:
@@ -42,6 +42,13 @@ else:
         copyfile('etc/diskalert.conf', '/etc/diskalert.conf')
     else:
         print("Either /etc doesn't exist, or isn't a directory. We won't force it.")
+
+print("Installing man pages...")
+try:
+    copyfile('etc/diskalert.1', '/usr/share/man/man1/diskalert.1')
+    os.system('mandb')
+except Exception as err:
+    print("Error occurred while installing man page: {0}".format(str(err)))
 
 print("""Installation successful!
       Please check the settings in /etc/diskalert.conf so that the script will work accordingly.
