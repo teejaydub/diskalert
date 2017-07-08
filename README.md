@@ -10,3 +10,7 @@ Simply clone the repository, and then in the directory run the setup.py installe
 This will create the DiskAlert Python package in the default location, the diskalert binary in your path, and will instal the diskalert man pages.
 
 After installation, don't forget to setup the `/etc/diskalert.conf` file.
+
+# Updating
+
+Simply rerun the setup.py installer after cloning or pulling the repository. This will **not** update the `/etc/diskalert.conf` file.
