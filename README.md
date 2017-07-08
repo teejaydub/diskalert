@@ -3,7 +3,7 @@ A script to alert on a defined disk usage percentile
 
 # Installation
 
-Simply clone the repository, and then in the directory run the setup.py installer (may need root priviledges).
+Simply clone the repository, and then in the directory run the setup.py installer (may need root privileges).
 
 ```python setup.py install```
 
