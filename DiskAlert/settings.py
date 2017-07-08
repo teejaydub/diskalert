@@ -18,16 +18,16 @@ class settings(object):
     def read_settings(self):
         conf = ConfigParser.ConfigParser()
         conf.read(self.filename)
-        self.threshold = str(conf['configuration']['threshold'])
-        self.devices = str(conf['configuration']['devices'])
+        self.threshold = conf.get('configuration', 'threshold')
+        self.devices = conf.get('configuration', 'devices')
 
-        self.hostname = str(conf['email']['hostname'])
-        self.username = str(conf['email']['username'])
-        self.sender = str(conf['email']['sender'])
-        self.receivers = str(conf['email']['receivers'])
-        self.password = str(conf['email']['password'])
-        self.port = str(conf['email']['port'])
-        self.tls = str(conf['email']['tls'])
+        self.hostname = conf.get('email', 'hostname')
+        self.username = conf.get('email', 'username')
+        self.sender = conf.get('email', 'sender')
+        self.receivers = conf.get('email', 'receivers')
+        self.password = conf.get('email', 'password')
+        self.port = conf.get('email', 'port')
+        self.tls = conf.get('email', 'tls')
         if self.tls.lower() == "true":
             self.tls = True
         else:
