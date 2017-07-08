@@ -52,5 +52,4 @@ except Exception as err:
 
 print("""Installation successful!
       Please check the settings in /etc/diskalert.conf so that the script will work accordingly.
-      Try service diskalert start after setting up diskalert.conf
       You can always check the man pages for diskalert.""")

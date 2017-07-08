@@ -20,7 +20,6 @@ class settings(object):
         conf.read(self.filename)
         self.threshold = str(conf['configuration']['threshold'])
         self.devices = str(conf['configuration']['devices'])
-        self.sleep_time = int(conf['configuration']['sleep_time'])
 
         self.hostname = str(conf['email']['hostname'])
         self.username = str(conf['email']['username'])
