@@ -35,7 +35,7 @@ class ServerInfo(object):
             t = float(int(a.strip())/1000.0)
             return t
         except Exception as err:
-            print("Failed to retrieve CPU Temperature: {0}".format(str(err)))
+            # print("Failed to retrieve CPU Temperature: {0}".format(str(err)))
             return "Unknown"
 
     def _get_current_datetime(self):
@@ -68,22 +68,22 @@ def generate_alarm():
     info = ServerInfo()
 
     a = settings()
-    subject = "Veriteknik - Disk Usage Alert"
+    subject = "Disk Usage Alert"
     msg = """
-    <h2>Disk usage report</h2>
+    <h2>Disk usage - {long_hostname}</h2>
     <pre>
     Server Time: <b>{now}</b>
-    Threshold: <b>%{thres}</b>
+    Threshold: <b>{thres}%</b>
     Hostname: <b>{hostname}</b>
     External IP Address: <b>{ip}</b>
-    CPU Temperature: <b>{cpu_temp}</b> Celsius
     -----------------------------------
     
     
     {df}
     </pre>
 
-    """.format(thres=a.threshold, df=output, hostname=info.hostname, ip=info.ip, cpu_temp=info.cpu_temp, now=info.now)
+    """.format(thres=a.threshold, df=output, hostname=info.hostname,
+        long_hostname=a.long_hostname, ip=info.ip, cpu_temp=info.cpu_temp, now=info.now)
 
     msg = msg.replace("\n", "<br>")
 

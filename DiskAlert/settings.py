@@ -20,6 +20,7 @@ class settings(object):
         conf.read(self.filename)
         self.threshold = conf.get('configuration', 'threshold')
         self.devices = conf.get('configuration', 'devices')
+        self.long_hostname = conf.get('configuration', 'long_hostname')
 
         self.hostname = conf.get('email', 'hostname')
         self.username = conf.get('email', 'username')
