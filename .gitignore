@@ -27,6 +27,9 @@ wheels/
 .installed.cfg
 *.egg
 
+# Omit uv.lock for now, since this is for general use.
+uv.lock
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.

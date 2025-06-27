@@ -2,37 +2,7 @@ from setuptools import setup
 import os
 from shutil import copyfile
 
-try:
-    input = raw_input
-except NameError:
-    pass
-
-result = 0
-while result == 0:
-    result = input("This will install DiskAlert to your system. Do you wish to continue? (y/N):")
-
-    if result == "" or result in "nN":
-        print("Aborting Installation...")
-        raise SystemExit
-
-    elif result in "yY":
-        break
-
-    else:
-        result = 0
-
-setup(
-    name="DiskAlert",
-    version="0.1",
-    packages=["DiskAlert"],
-    license="MIT",
-    long_description=open('README.md').read(),
-    entry_points={
-        'console_scripts':[
-            'diskalert = DiskAlert.__main__:main'
-        ]
-    },
-)
+setup()
 
 print("Checking if /etc/diskalert.conf exists...")
 if os.path.isfile("/etc/diskalert.conf"):

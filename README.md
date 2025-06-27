@@ -1,16 +1,26 @@
 # diskalert
 A script to alert on a defined disk usage percentile
 
-# Installation
+## Installation
 
-Simply clone the repository, and then in the directory run the setup.py installer (may need root privileges).
+Clone the repository, and then in the directory:
 
-```python setup.py install```
+```sudo pipx install```
 
-This will create the DiskAlert Python package in the default location, the diskalert binary in your path, and will install the diskalert man pages.
+This will create the diskalert Python package in the default location, the diskalert binary in your path, and will install the diskalert man pages.
 
-After installation, don't forget to setup the `/etc/diskalert.conf` file.
+Alternately, install [UV](https://docs.astral.sh/uv/getting-started/installation/), then use:
 
-# Updating
+```uv tool install .```
+
+After installation, don't forget to set up the `/etc/diskalert.conf` file.
+
+## Updating
 
 Simply rerun the setup.py installer after cloning or pulling the repository. This will **not** update the `/etc/diskalert.conf` file.
+
+## Manual testing
+
+If you have UV installed, you can test the script from this directory via:
+
+```uvx .```

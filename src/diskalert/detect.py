@@ -1,8 +1,9 @@
 import subprocess
 import socket
-from mailer import MailObject
-from settings import settings
 import time
+
+from .mailer import MailObject
+from .settings import settings
 
 class ServerInfo(object):
     def __init__(self):
@@ -24,7 +25,7 @@ class ServerInfo(object):
             s.close()
             return ip
         except Exception as err:
-            print("Error getting external ip: {0}".format(str(err)))
+            print(f"Error getting external ip: {str(err)}")
             return "Unknown"
 
     def _get_cpu_temp(self):
@@ -41,25 +42,28 @@ class ServerInfo(object):
     def _get_current_datetime(self):
         timezone = time.strftime("%z")
         now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        return "{0} {1}".format(now, timezone)
+        return f"{now} {timezone}"
 
 
 def get_usage(device_name):
     try:
         p = subprocess.Popen(["df", device_name], stdout=subprocess.PIPE)
-        output = p.communicate()[0]
+        output = p.communicate()[0].decode('ascii')
         device, size, used, available, percent, mountpoint = output.split('\n')[1].split()
         return device, size, used, available, percent, mountpoint
     except Exception as err:
-        print("An error occurred: {0}".format(str(err)))
+        print(f"An error occurred: {str(err)}")
         return None
 
 def check_usage(devices, threshold):
     for disk in devices:
         disk_usage = get_usage(disk)
         if disk_usage[4][:-1] >= threshold:
+            print(f"{disk}: {disk_usage[4]} is at or over {threshold}%!")
             generate_alarm()
             return
+        else:
+          print(f"{disk}: OK at {disk_usage[4]}")
 
 def generate_alarm():
     p = subprocess.Popen(["df", "-h"], stdout=subprocess.PIPE)

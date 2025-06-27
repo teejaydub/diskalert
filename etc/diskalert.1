@@ -2,13 +2,21 @@
 .\" Contact github.com/eaydin to correct errors or typos.
 .TH man 1 "8 July 2017" "1.0" "diskalert man page"
 .SH NAME
-diskalert \- Simple tool to get alerts of disk size.
+diskalert \- Simple tool to get email alerts when a disk is low on free space.
+
 .SH SYNOPSIS
 diskalert
+
 .SH DESCRIPTION
 Simply running the program will read the settings in
 .B /etc/diskalert.conf
 and execute accordingly.
+
+If any of the listed devices has a "percent used" value that's equal to or higher
+than the threshold, an alert email will be sent according to the
+.B [email]
+section.
+
 .SH OPTIONS
 This section describes the settings in the diskalert.conf file.
 
@@ -20,6 +28,9 @@ threshold
 
 devices
     List of devices (comma seperated) that the script will perform checks.
+
+long_hostname
+    The name for this host to use in the email message.
 
 .B [email]
 Configuration about the email alerts.
