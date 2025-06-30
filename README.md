@@ -21,6 +21,6 @@ Simply rerun the setup.py installer after cloning or pulling the repository. Thi
 
 ## Manual testing
 
-If you have UV installed, you can test the script from this directory via:
+If you have UV installed, you can run the script from this directory via:
 
-```uvx .```
+```uv run src/diskalert```
