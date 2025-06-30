@@ -15,7 +15,7 @@ class ServerInfo(object):
     def _get_hostname(self):
         p1 = subprocess.Popen(["hostname"], stdout=subprocess.PIPE)
         out1 = p1.communicate()[0]
-        return out1.strip()
+        return out1.decode('ascii').strip()
 
     def _get_outgoing_ip(self):
         try:
@@ -67,28 +67,27 @@ def check_usage(devices, threshold):
 
 def generate_alarm():
     p = subprocess.Popen(["df", "-h"], stdout=subprocess.PIPE)
-    output = p.communicate()[0]
+    output = p.communicate()[0].decode('ascii')
 
     info = ServerInfo()
 
     a = settings()
     subject = "Disk Usage Alert"
     msg = """
-    <h2>Disk usage - {long_hostname}</h2>
-    <pre>
-    Server Time: <b>{now}</b>
-    Threshold: <b>{thres}%</b>
-    Hostname: <b>{hostname}</b>
-    External IP Address: <b>{ip}</b>
-    -----------------------------------
-    
-    
-    {df}
-    </pre>
+<h2>Disk usage - {long_hostname}</h2>
+<pre>
+Server Time: <b>{now}</b>
+Threshold: <b>{thres}%</b>
+Hostname: <b>{hostname}</b>
+External IP Address: <b>{ip}</b>
+-----------------------------------
 
-    """.format(thres=a.threshold, df=output, hostname=info.hostname,
+
+{df}
+</pre>
+"""
+    msg = msg.format(thres=a.threshold, df=output, hostname=info.hostname,
         long_hostname=a.long_hostname, ip=info.ip, cpu_temp=info.cpu_temp, now=info.now)
 
-    msg = msg.replace("\n", "<br>")
-
+    # msg = msg.replace("\n", "<br>")
     mail = MailObject(a.hostname, a.sender, a.receivers, subject, msg, a.port, a.username, a.password)
